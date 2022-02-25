@@ -13,6 +13,21 @@ export class Book {
 
   @Prop()
   isbn?: string;
+
+  @Prop()
+  description?: string;
+
+  @Prop()
+  summary?: string;
+
+  @Prop()
+  notes?: string;
+
+  @Prop()
+  recommended?: boolean;
+
+  @Prop()
+  categories?: string[];
 }
 
 export const BookSchema = SchemaFactory.createForClass(Book);

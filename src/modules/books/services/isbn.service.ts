@@ -19,6 +19,8 @@ export class ISBNService {
           isbnToFind,
           book.title,
           book.authors.join(','),
+          book.description,
+          book.categories,
         );
       })
       .catch(function (err) {
