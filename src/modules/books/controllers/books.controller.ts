@@ -18,6 +18,26 @@ export class BooksController {
     return await this.service.getAllBooks();
   }
 
+  @Get(':id')
+  @ApiOperation({ description: 'Get a book by id.' })
+  async getOneById(@Param() params) {
+    return await this.service.getById(params.id);
+  }
+
+  @Get('search/:name')
+  @ApiOperation({ description: 'Get books by a partial name.' })
+  async searchByName(@Param() params) {
+    return await this.service.search(params.name);
+  }
+
+  @Get('website/:id')
+  @ApiOperation({
+    description: 'Get book by id formated for adding to my website',
+  })
+  async getForWebsiteById(@Param() params) {
+    return await this.service.getForWebsiteById(params.id);
+  }
+
   @Post()
   @ApiOperation({ description: 'Add a book to the library.' })
   async create(@Body() createBookDto: CreateBookDto) {
