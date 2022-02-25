@@ -1,8 +1,9 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { BooksService } from '../services/books.service';
 import { CreateBookDto } from '../dtos/create-book.dto';
 import { ApiOperation } from '@nestjs/swagger';
 import { ISBNService } from '../services/isbn.service';
+import { UpdateBookDto } from '../dtos/update-book.dto';
 
 @Controller()
 export class BooksController {
@@ -28,5 +29,11 @@ export class BooksController {
   async createByISBN(@Param() params) {
     const bookToCreate = await this.isbnService.find(params.isbn);
     return await this.service.create(bookToCreate);
+  }
+
+  @Put()
+  @ApiOperation({ description: 'Update a book in the library.' })
+  async update(@Body() updateBookDto: UpdateBookDto) {
+    return await this.service.update(updateBookDto);
   }
 }
