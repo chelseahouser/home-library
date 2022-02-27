@@ -31,4 +31,14 @@ export class CreateBookDto {
     description: 'An array of categories the book topic fits into.',
   })
   categories?: string[];
+
+  @ApiProperty({
+    description: 'A string value to note location of the book',
+  })
+  location?: string;
+
+  @ApiProperty({
+    description: 'Format the book is (Hardcover, Paperback, Digital)',
+  })
+  format?: string;
 }

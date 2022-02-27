@@ -28,6 +28,12 @@ export class Book {
 
   @Prop()
   categories?: string[];
+
+  @Prop()
+  location?: string;
+
+  @Prop()
+  format?: string;
 }
 
 export const BookSchema = SchemaFactory.createForClass(Book);

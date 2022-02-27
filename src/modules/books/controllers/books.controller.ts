@@ -4,6 +4,7 @@ import { CreateBookDto } from '../dtos/create-book.dto';
 import { ApiOperation } from '@nestjs/swagger';
 import { ISBNService } from '../services/isbn.service';
 import { UpdateBookDto } from '../dtos/update-book.dto';
+import { BulkCreateBookDto } from '../dtos/bulk-create-book.dto';
 
 @Controller()
 export class BooksController {
@@ -44,7 +45,22 @@ export class BooksController {
     return await this.service.create(createBookDto);
   }
 
-  @Post(':isbn')
+  @Post('/bulk')
+  @ApiOperation({
+    description: 'Add a collection of books to the library by ISBN.',
+  })
+  async bulkCreateByISBN(@Body() bulkCreateBookDto: BulkCreateBookDto) {
+    bulkCreateBookDto.isbns.forEach(async (isbn) => {
+      const bookToCreate = await this.isbnService.find(isbn);
+      bookToCreate.location = bulkCreateBookDto.location;
+      bookToCreate.format = bulkCreateBookDto.format;
+
+      await this.service.create(bookToCreate);
+    });
+    return;
+  }
+
+  @Post('/isbn/:isbn')
   @ApiOperation({ description: 'Add a book to the library by ISBN.' })
   async createByISBN(@Param() params) {
     const bookToCreate = await this.isbnService.find(params.isbn);
