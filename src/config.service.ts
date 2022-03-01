@@ -19,13 +19,6 @@ export class ConfigService {
     return this.envConfig[key];
   }
 
-  public async getDatabaseConnectionStringConfig() {
-    if (this.get('GSM_ACTIVE') == 'true') {
-      return await this.getSecrets('MONGO_DB');
-    }
-    return this.get('MONGO_DB');
-  }
-
   public async getSecrets(secret: string): Promise<string> {
     const projectId = this.get('GOOGLE_PROJECT_ID');
     const secretId = this.get(secret);
@@ -33,6 +26,13 @@ export class ConfigService {
     const client = new SecretManagerServiceClient();
     const versionName = `projects/${projectId}/secrets/${secretId}/versions/latest`;
     const [version] = await client.accessSecretVersion({ name: versionName });
-    return version.payload.data.toString(); //secret.payload.data.toString('utf8');
+    return version.payload.data.toString();
+  }
+
+  public async getDatabaseConnectionStringConfig() {
+    if (this.get('GSM_ACTIVE') == 'true') {
+      return await this.getSecrets('MONGO_DB');
+    }
+    return this.get('MONGO_DB');
   }
 }

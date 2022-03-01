@@ -1,0 +1,307 @@
+{
+    "openapi":"3.0.0",
+    "paths":{
+       "/":{
+          "get":{
+             "operationId":"BooksController_index",
+             "summary":"",
+             "description":"Get all books in the library.",
+             "parameters":[
+                
+             ],
+             "responses":{
+                "200":{
+                   "description":""
+                }
+             }
+          },
+          "post":{
+             "operationId":"BooksController_create",
+             "summary":"",
+             "description":"Add a book to the library.",
+             "parameters":[
+                
+             ],
+             "requestBody":{
+                "required":true,
+                "content":{
+                   "application/json":{
+                      "schema":{
+                         "$ref":"#/components/schemas/CreateBookDto"
+                      }
+                   }
+                }
+             },
+             "responses":{
+                "201":{
+                   "description":""
+                }
+             }
+          },
+          "put":{
+             "operationId":"BooksController_update",
+             "summary":"",
+             "description":"Update a book in the library.",
+             "parameters":[
+                
+             ],
+             "requestBody":{
+                "required":true,
+                "content":{
+                   "application/json":{
+                      "schema":{
+                         "$ref":"#/components/schemas/UpdateBookDto"
+                      }
+                   }
+                }
+             },
+             "responses":{
+                "200":{
+                   "description":""
+                }
+             }
+          }
+       },
+       "/{id}":{
+          "get":{
+             "operationId":"BooksController_getOneById",
+             "summary":"",
+             "description":"Get a book by id.",
+             "parameters":[
+                
+             ],
+             "responses":{
+                "200":{
+                   "description":""
+                }
+             }
+          }
+       },
+       "/search/{name}":{
+          "get":{
+             "operationId":"BooksController_searchByName",
+             "summary":"",
+             "description":"Get books by a partial name.",
+             "parameters":[
+                
+             ],
+             "responses":{
+                "200":{
+                   "description":""
+                }
+             }
+          }
+       },
+       "/website/{id}":{
+          "get":{
+             "operationId":"BooksController_getForWebsiteById",
+             "summary":"",
+             "description":"Get book by id formated for adding to my website",
+             "parameters":[
+                
+             ],
+             "responses":{
+                "200":{
+                   "description":""
+                }
+             }
+          }
+       },
+       "/bulk":{
+          "post":{
+             "operationId":"BooksController_bulkCreateByISBN",
+             "summary":"",
+             "description":"Add a collection of books to the library by ISBN.",
+             "parameters":[
+                
+             ],
+             "requestBody":{
+                "required":true,
+                "content":{
+                   "application/json":{
+                      "schema":{
+                         "$ref":"#/components/schemas/BulkCreateBookDto"
+                      }
+                   }
+                }
+             },
+             "responses":{
+                "201":{
+                   "description":""
+                }
+             }
+          }
+       },
+       "/isbn/{isbn}":{
+          "post":{
+             "operationId":"BooksController_createByISBN",
+             "summary":"",
+             "description":"Add a book to the library by ISBN.",
+             "parameters":[
+                
+             ],
+             "responses":{
+                "201":{
+                   "description":""
+                }
+             }
+          }
+       }
+    },
+    "info":{
+       "title":"Home Library API",
+       "description":"This is an API for managing my Home Library Book Collection",
+       "version":"1.0",
+       "contact":{
+          
+       }
+    },
+    "tags":[
+       {
+          "name":"books",
+          "description":""
+       }
+    ],
+    "servers":[
+       
+    ],
+    "components":{
+       "schemas":{
+          "CreateBookDto":{
+             "type":"object",
+             "properties":{
+                "title":{
+                   "type":"string",
+                   "description":"Title of the Book"
+                },
+                "author":{
+                   "type":"string",
+                   "description":"Author of the Book"
+                },
+                "isbn":{
+                   "type":"string",
+                   "description":"ISBN-13 Identifier for the Book"
+                },
+                "description":{
+                   "type":"string",
+                   "description":"The official description of the book."
+                },
+                "categories":{
+                   "description":"An array of categories the book topic fits into.",
+                   "type":"array",
+                   "items":{
+                      "type":"string"
+                   }
+                },
+                "location":{
+                   "type":"string",
+                   "description":"A string value to note location of the book"
+                },
+                "format":{
+                   "type":"string",
+                   "description":"Format the book is (Hardcover, Paperback, Digital)"
+                }
+             },
+             "required":[
+                "title",
+                "author",
+                "isbn",
+                "description",
+                "categories",
+                "location",
+                "format"
+             ]
+          },
+          "BulkCreateBookDto":{
+             "type":"object",
+             "properties":{
+                "isbns":{
+                   "description":"ISBN-13 Identifier for the Books",
+                   "type":"array",
+                   "items":{
+                      "type":"string"
+                   }
+                },
+                "location":{
+                   "type":"string",
+                   "description":"Location of the books to add"
+                },
+                "format":{
+                   "type":"string",
+                   "description":"Format of the books to add"
+                }
+             },
+             "required":[
+                "isbns",
+                "location",
+                "format"
+             ]
+          },
+          "UpdateBookDto":{
+             "type":"object",
+             "properties":{
+                "_id":{
+                   "type":"string",
+                   "description":"Identifier for the Book in the library."
+                },
+                "title":{
+                   "type":"string",
+                   "description":"Title of the Book"
+                },
+                "author":{
+                   "type":"string",
+                   "description":"Author of the Book"
+                },
+                "isbn":{
+                   "type":"string",
+                   "description":"ISBN-13 Identifier for the Book"
+                },
+                "description":{
+                   "type":"string",
+                   "description":"The official description of the book."
+                },
+                "summary":{
+                   "type":"string",
+                   "description":"Personal summary of the book."
+                },
+                "notes":{
+                   "type":"string",
+                   "description":"Personal notes about the book."
+                },
+                "recommended":{
+                   "type":"boolean",
+                   "description":"Boolean value denoting if the book is recommended"
+                },
+                "categories":{
+                   "description":"An array of categories the book topic fits into.",
+                   "type":"array",
+                   "items":{
+                      "type":"string"
+                   }
+                },
+                "location":{
+                   "type":"string",
+                   "description":"A string value to note location of the book"
+                },
+                "format":{
+                   "type":"string",
+                   "description":"Format the book is (Hardcover, Paperback, Digital)"
+                }
+             },
+             "required":[
+                "_id",
+                "title",
+                "author",
+                "isbn",
+                "description",
+                "summary",
+                "notes",
+                "recommended",
+                "categories",
+                "location",
+                "format"
+             ]
+          }
+       }
+    }
+ }
