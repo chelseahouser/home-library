@@ -35,5 +35,23 @@ describe('BookController', () => {
     it('should return an array of all books', async () => {
       expect((await bookController.index())[0].title).toBe(testBook.title);
     });
+
+    it('should get a book by id', async () => {
+      expect(await (await bookController.getOneById('123')).title).toBe(
+        testBook.title,
+      );
+    });
+
+    it('should search for a book by name partial', async () => {
+      expect(await (await bookController.searchByName('test'))[0].title).toBe(
+        testBook.title,
+      );
+    });
+
+    it('should search for a book by name partial', async () => {
+      expect(await (await bookController.getForWebsiteById('123')).title).toBe(
+        testBook.title,
+      );
+    });
   });
 });
