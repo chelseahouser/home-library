@@ -1,5 +1,13 @@
 ## Description
-This is application is a NestJS API for creating managing my home library.
+This is application is a NestJS API for creating managing my home library. Yes I know that applications that build up collections of books are a dime a dozen, however this was designed to answer a specific question I had: Where in the world is my copy of "The Unicorn Project"? I realized I couldn't even remember if I had it in hard copy on a bookcase somewhere in my home or office, or if it was an audiobook in my audible account. In the end I did find it in my kindle library. I intend with this application to compile a collection of all of my books, including those in digital formats. I am also able to make updating book information such as my reviews and descriptions in a way that I can export them directly to my website.
+
+## TODO
+
+- Import google library from google books api
+- Find a way to connect to amazon, since no public APIs exist
+- Host this API somewhere that I can manage it outside of my local environment.
+- Build up tests, planning to stick with Jest here
+- Create a UI around this?
 
 ## Installation
 
